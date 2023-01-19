@@ -61,10 +61,8 @@ namespace Hr.Application.Services
                 FatherName = staffCreateModel.FatherName,
                 Age = staffCreateModel.Age,
                 PhoneNumber = staffCreateModel.PhoneNumber,
-                PassportNumber = staffCreateModel.PassportNumber,
-                education = staffCreateModel.EducationLevel,
-                position = staffCreateModel.Position,
-                amount = staffCreateModel.Amount,
+                PassportNumber = staffCreateModel.PassportNumber,                
+
             };
 
             await _context.Staff.AddAsync(staff);
