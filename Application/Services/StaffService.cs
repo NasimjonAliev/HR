@@ -75,15 +75,12 @@ namespace Hr.Application.Services
             var staff = _context.Staff.FirstOrDefault(t => t.Id == staffUpdateModel.Id)
                 ?? throw new Exception("Not Found");
 
-            staff.User.FirstName = staffUpdateModel.FirstName;
-            staff.User.LastName = staffUpdateModel.LastName;
-            staff.User.FatherName = staffUpdateModel.FatherName;
-            staff.User.Age = staffUpdateModel.Age;
-            staff.User.PhoneNumber = staffUpdateModel.PhoneNumber;
-            staff.User.PassportNumber = staffUpdateModel.PassportNumber;
-            staff.Education.EducationLevel = staffUpdateModel.EducationLevel;
-            staff.Position.Name = staffUpdateModel.Position;
-            staff.Position.Amount = staffUpdateModel.Amount;
+            staff.FirstName = staffUpdateModel.FirstName;
+            staff.LastName = staffUpdateModel.LastName;
+            staff.FatherName = staffUpdateModel.FatherName;
+            staff.Age = staffUpdateModel.Age;
+            staff.PhoneNumber = staffUpdateModel.PhoneNumber;
+            staff.PassportNumber = staffUpdateModel.PassportNumber;
 
             _context.Staff.Update(staff);
             await _context.SaveChangesAsync();
