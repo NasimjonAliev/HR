@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using Domain.Entities.Common;
 using Hr.Application.Models.StaffModels;
 using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
