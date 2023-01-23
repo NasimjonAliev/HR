@@ -17,13 +17,13 @@ namespace Infrastructure.Configurations
                 .IsRequired();
 
             builder.HasOne(c => c.Education)
-                .WithMany()
+                .WithMany(c => c.Staffs)
                 .HasForeignKey(x => x.EducationId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
             builder.HasOne(c => c.Position)
-                .WithMany()
+                .WithMany(c => c.Staffs)
                 .HasForeignKey(x => x.PositionId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();

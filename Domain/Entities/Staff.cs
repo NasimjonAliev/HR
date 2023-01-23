@@ -3,7 +3,7 @@ using Domain.Entities.Common;
 
 namespace Domain.Entities
 {
-    public class Staff : User
+    public class Staff : BaseEntity
     {
         public Guid UserId { get; set; }
         public Guid EducationId { get; set; }

@@ -17,37 +17,13 @@ namespace Hr.Application.Services
             return await _context.Staff
                 .Select(c => new StaffViewModel
                 {
-                    FirstName = c.User.FirstName,
-                    LastName = c.User.LastName,
-                    FatherName = c.User.FatherName,
-                    Age = c.User.Age,
-                    PhoneNumber = c.User.PhoneNumber,
-                    PassportNumber = c.User.PassportNumber,
-                    EducationLevel = c.Education.EducationLevel,
-                    Position = c.Position.Name,
-                    Amount = c.Position.Amount,
+                    UserName = $"{c.User.FirstName} {c.User.LastName} {c.User.FatherName}",
+                    EducationName  = c.Education.UniversityName,
+                    PositionName = c.Position.Name
                 })
                 .ToListAsync();
         }
-        public async Task<StaffViewModel> GetById(Guid id)
-        {
-            return await _context.Staff
-                .Where(t => t.Id == id)
-                .Select(c => new StaffViewModel
-                {
-                    FirstName = c.User.FirstName,
-                    LastName = c.User.LastName,
-                    FatherName = c.User.FatherName,
-                    Age = c.User.Age,
-                    PhoneNumber = c.User.PhoneNumber,
-                    PassportNumber = c.User.PassportNumber,
-                    EducationLevel = c.Education.EducationLevel,
-                    Position = c.Position.Name,
-                    Amount = c.Position.Amount,
-                })
-                .FirstOrDefaultAsync()
-                    ?? throw new Exception("Not Found");
-        }
+
         public async Task<Staff> Create(StaffCreateModel staffCreateModel)
         {
             if (staffCreateModel == null)
@@ -55,12 +31,10 @@ namespace Hr.Application.Services
 
             var staff = new Staff
             {
-                FirstName = staffCreateModel.FirstName,
-                LastName = staffCreateModel.LastName,
-                FatherName = staffCreateModel.FatherName,
-                Age = staffCreateModel.Age,
-                PhoneNumber = staffCreateModel.PhoneNumber,
-                PassportNumber = staffCreateModel.PassportNumber,
+                Id = Guid.NewGuid(),
+                UserId = staffCreateModel.UserId,
+                EducationId = staffCreateModel.EducationId,
+                PositionId = staffCreateModel.PositionId
             };
 
             await _context.Staff.AddAsync(staff);
@@ -74,12 +48,9 @@ namespace Hr.Application.Services
             var staff = _context.Staff.FirstOrDefault(t => t.Id == staffUpdateModel.Id)
                 ?? throw new Exception("Not Found");
 
-            staff.FirstName = staffUpdateModel.FirstName;
-            staff.LastName = staffUpdateModel.LastName;
-            staff.FatherName = staffUpdateModel.FatherName;
-            staff.Age = staffUpdateModel.Age;
-            staff.PhoneNumber = staffUpdateModel.PhoneNumber;
-            staff.PassportNumber = staffUpdateModel.PassportNumber;
+            staff.UserId = staffUpdateModel.UserId;
+            staff.EducationId = staffUpdateModel.EducationId;
+            staff.PositionId = staffUpdateModel.PositionId;
 
             _context.Staff.Update(staff);
             await _context.SaveChangesAsync();

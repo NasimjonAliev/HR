@@ -1,14 +1,10 @@
-﻿using Hr.Application.Models.UserModels;
-
-namespace Hr.Application.Models.StaffModels
+﻿namespace Hr.Application.Models.StaffModels
 {
-    public class StaffViewModel : UserViewModel
+    public class StaffViewModel
     {
-        public string PassportNumber { get; set; }
-        public string EducationLevel { get; set; }
-        public string Position { get; set; }
-        public double Amount { get; set; }
-
+        public Guid Id { get; set; }
+        public string UserName { get; set; }
+        public string EducationName { get; set; }
+        public string PositionName { get; set; }
     }
-
 }

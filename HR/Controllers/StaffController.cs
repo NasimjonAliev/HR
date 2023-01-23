@@ -23,12 +23,12 @@ namespace Hr.WebApi.Controllers
             return Ok(staff);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute] Guid id)
-        {
-            var staff = await _staffService.GetById(id);
-            return Ok(staff);     
-        }
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetById([FromRoute] Guid id)
+        //{
+        //    var staff = await _staffService.GetById(id);
+        //    return Ok(staff);     
+        //}
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] StaffCreateModel staffCreateModel)
