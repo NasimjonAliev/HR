@@ -1,8 +1,11 @@
 ﻿using FluentValidation;
+using Hr.Application.Models.UserModels;
 using Hr.Application.Services;
+using Hr.Application.Validators;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using static Hr.Application.Services.UserService;
 
 namespace Hr.Application
 {
@@ -12,8 +15,11 @@ namespace Hr.Application
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStaffService, StaffService>();
+
+            //services.AddScoped<IValidator<UserCreateModel>, UserCreateValidator>();
 
             return services;
         }

@@ -1,4 +1,5 @@
-﻿using Hr.Application.Models.UserModels;
+﻿using FluentValidation;
+using Hr.Application.Models.UserModels;
 using Hr.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,16 @@ namespace Hr.WebApi.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IValidator<UserCreateModel> _validatorCreate;
+        private readonly IValidator<UserUpdateModel> _validatorUpdate;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, 
+            IValidator<UserUpdateModel> validator, 
+            IValidator<UserCreateModel> validator1)
         {
             _userService = userService;
+            _validatorUpdate = validator;
+            _validatorCreate = validator1;
         }
 
         [HttpGet]
@@ -27,25 +34,54 @@ namespace Hr.WebApi.Controllers
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var user = await _userService.GetById(id);
-            return Ok(user);     
+
+            return Ok(user);
+        }
+
+        [HttpGet("update/{id}")]
+        public async Task<IActionResult> GetByIdUpdate([FromRoute] Guid id)
+        {
+            var user = await _userService.GetByIdUpdate(id);
+
+            return Ok(user);
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] UserCreateModel userCreateModel)
         {
-            return Ok(await _userService.Create(userCreateModel));
+            var result = await _validatorCreate.ValidateAsync(userCreateModel);
+
+            if (result.IsValid)
+            {
+                await _userService.Create(userCreateModel);
+
+                return Ok("Успешно добавлен");
+            }
+            else
+                return BadRequest(result.Errors.Select(c => c.ErrorMessage));
         }
 
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UserUpdateModel userUpdateModel)
         {
-            return Ok(await _userService.Update(userUpdateModel));
+            var result = await _validatorUpdate.ValidateAsync(userUpdateModel);
+
+            if (result.IsValid)
+            {
+                await _userService.Update(userUpdateModel);
+
+                return Ok("Успешно обновлен");
+            }
+
+            return BadRequest(result.Errors.Select(g => g.ErrorMessage));           
         }
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            return Ok(await _userService.Delete(id));
+            await _userService.Delete(id);
+
+            return Ok("Успешно удалено");
         }
     }
 }

@@ -7,8 +7,9 @@ namespace Hr.Application.Services
     {
         Task<List<UserViewModel>> GetAll();
         Task<UserViewModel> GetById(Guid id);
-        Task<User> Create(UserCreateModel userCreateModel);
-        Task<User> Update(UserUpdateModel userUpdateModel);
-        Task<User> Delete(Guid id);
+        Task<UserUpdateModelById> GetByIdUpdate(Guid id);
+        Task Create(UserCreateModel userCreateModel);
+        Task Update(UserUpdateModel userUpdateModel);
+        Task Delete(Guid id);
     }
 }
