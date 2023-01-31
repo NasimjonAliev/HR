@@ -18,6 +18,8 @@ namespace Hr.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStaffService, StaffService>();
+            services.AddScoped<IPositionService, PositionService>();
+            services.AddScoped<IEducationService, EducationService>();
 
             //services.AddScoped<IValidator<UserCreateModel>, UserCreateValidator>();
 

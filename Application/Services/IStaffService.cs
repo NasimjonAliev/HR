@@ -10,6 +10,5 @@ namespace Hr.Application.Services
         Task Create(StaffCreateModel staffCreateModel);
         Task Update(StaffUpdateModel staffUpdateModel);
         Task Delete(Guid id);
-
     }
 }

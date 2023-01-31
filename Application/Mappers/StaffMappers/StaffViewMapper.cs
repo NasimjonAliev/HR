@@ -8,7 +8,10 @@ namespace Hr.Application.Mappers.StaffMappers
     {
         public StaffViewMapper()
         {
-            CreateMap<Staff, StaffViewModel>();
+            CreateMap<Staff, StaffViewModel>()
+                .ForMember(c => c.UserName, d => d.MapFrom(scr => $"{scr.User.FirstName} {scr.User.LastName}"))
+                .ForMember(c => c.EducationName, d => d.MapFrom(c => c.Education.UniversityName))
+                .ForMember(c => c.PositionName, d => d.MapFrom(scr => scr.Position.Name));               
         }
     }
 }

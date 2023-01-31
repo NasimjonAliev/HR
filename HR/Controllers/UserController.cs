@@ -55,7 +55,7 @@ namespace Hr.WebApi.Controllers
             {
                 await _userService.Create(userCreateModel);
 
-                return Ok("Успешно добавлен");
+                return Ok("Пользователь успешно добавлен");
             }
             else
                 return BadRequest(result.Errors.Select(c => c.ErrorMessage));
@@ -70,7 +70,7 @@ namespace Hr.WebApi.Controllers
             {
                 await _userService.Update(userUpdateModel);
 
-                return Ok("Успешно обновлен");
+                return Ok("Пользователь успешно обновлен");
             }
 
             return BadRequest(result.Errors.Select(g => g.ErrorMessage));           
@@ -81,7 +81,7 @@ namespace Hr.WebApi.Controllers
         {
             await _userService.Delete(id);
 
-            return Ok("Успешно удалено");
+            return Ok("Пользователь успешно удалено");
         }
     }
 }
