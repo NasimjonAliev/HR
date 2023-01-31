@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hr.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/staff")]
+    [Route("api/Staff")]
     public class StaffController : Controller
     {
         private readonly IStaffService _staffService;

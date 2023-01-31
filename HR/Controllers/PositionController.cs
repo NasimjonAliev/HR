@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hr.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/staff")]
+    [Route("api/Position")]
     public class PositionController : Controller
     {
         private readonly IPositionService _positionService;

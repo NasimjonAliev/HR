@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hr.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/users")]
+    [Route("api/Users")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;

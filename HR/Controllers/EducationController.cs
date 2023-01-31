@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hr.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/staff")]
+    [Route("api/Education")]
     public class EducationController : Controller
     {
         private readonly IEducationService _educationService;
