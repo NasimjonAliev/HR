@@ -14,7 +14,7 @@ namespace Hr.Application.Validators.PositionValodators
                 .WithMessage("Заполните поля Name");
             RuleFor(t => t.Amount)
                 .NotNull()
-                .LessThan(0);
+                .GreaterThan(0);
         }
     }
 }

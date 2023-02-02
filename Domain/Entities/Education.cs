@@ -1,5 +1,4 @@
-﻿
-using Domain.Entities.Common;
+﻿using Domain.Entities.Common;
 using System.Collections.ObjectModel;
 
 namespace Domain.Entities

@@ -8,6 +8,7 @@ namespace Hr.Application.Mappers.EducationMappers
     {
         public EducationCreateMapper()
         {
+            //TODO расмотреть и применить метод ReverseMap()
             CreateMap<EducationCreateModel, Education>();
         }
     }

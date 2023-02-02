@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Hr.Application.Models.EducationModels;
-using System.Text.RegularExpressions;
 
 namespace Hr.Application.Validators.EducationValidators
 {
@@ -8,15 +7,27 @@ namespace Hr.Application.Validators.EducationValidators
     {
         public EducationCreateValidator()
         {
-            //var regex = new Regex(@"^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$");
-
             RuleFor(t => t.UniversityName)
                 .NotNull()
                 .WithMessage("Заполните название Университета")
-                .Length(5, 50);
+                .MaximumLength(50);
 
             RuleFor(t => t.EducationLevel)
-                .Length(3, 30);            
+                .Length(3, 30);
+
+            RuleFor(t => t.StartedAt)
+                .Must(CheckDate)
+                .WithMessage("поля StartedAt начинается с 2000 года");
+
+            RuleFor(t => t.FinishedAt)
+                .Must(CheckDate)
+                .WithMessage("поля FinishedAt начинается с 2000 года");
+
+        }
+
+        public static bool CheckDate(DateTime date)
+        {
+            return date.Year > 2000;
         }
     }
 }

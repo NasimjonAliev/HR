@@ -13,14 +13,12 @@ builder.Services.AddApplicationContextLayer();
 builder.Services.AddCors(option => option.AddPolicy("MyBlogPolicy",
                         builder => 
                         {
-                            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                            builder.AllowAnyOrigin()
+                                   .AllowAnyHeader()
+                                   .AllowAnyMethod();
                         }));
 
 var app = builder.Build();
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.UseCors("MyBlogPolicy");
-app.MapControllers();
 
 if (app.Environment.IsDevelopment())
 {
@@ -28,7 +26,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
+app.UseCors("MyBlogPolicy");
+
+app.MapControllers();
+
 app.Run();
-
-
-

@@ -14,9 +14,10 @@ namespace Infrastructure.Configurations
                 .HasMaxLength(50)
                 .IsRequired();
 
+            //TODO округлить значение до двух чисел после запятой
             builder.Property(c => c.Amount)
-                .IsRequired();
-                
+                .HasPrecision(6,2)
+                .IsRequired();  
         }
     }
 }

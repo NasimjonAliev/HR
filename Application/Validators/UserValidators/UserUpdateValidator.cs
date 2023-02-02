@@ -10,15 +10,15 @@ namespace Hr.Application.Validators.UserValidators
         {
             var regex = new Regex(@"((992){1}\d{9}|(7){1}\d{10}){1}");
 
+            //TODO разделение валидаций по дочерним
+
             RuleFor(h => h.FirstName)
                 .NotNull()
-                .WithMessage("Имя пользователя не заполнено")
-                .Length(3,30)
+                .Length(3, 30)
                 .WithMessage("Неправильная имя");
 
             RuleFor(h => h.LastName)
                 .NotNull()
-                .WithMessage("Фамилия пользователя не заполнено")
                 .Length(3,30)
                 .WithMessage("Неправильная фамилия");
 

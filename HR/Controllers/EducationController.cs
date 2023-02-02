@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Hr.Application.Models.EducationModels;
-using Hr.Application.Models.PositionModels;
 using Hr.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +7,7 @@ namespace Hr.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Education")]
+
     public class EducationController : Controller
     {
         private readonly IEducationService _educationService;
@@ -22,6 +22,7 @@ namespace Hr.WebApi.Controllers
             _validatorCreate = validator;
             _validatorUpdate = validator1;
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

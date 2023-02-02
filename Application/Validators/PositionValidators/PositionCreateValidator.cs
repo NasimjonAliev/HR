@@ -10,9 +10,10 @@ namespace Hr.Application.Validators.PositionValodators
             RuleFor(t => t.Name)
                 .NotNull()
                 .WithMessage("Заполните поля Name");
+
             RuleFor(t => t.Amount)
                 .NotNull()
-                .LessThan(0);
+                .GreaterThan(0);
         }
     }
 }

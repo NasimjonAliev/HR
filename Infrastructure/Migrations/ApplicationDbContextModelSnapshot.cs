@@ -94,6 +94,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<double>("Amount")
+                        .HasPrecision(6, 2)
                         .HasColumnType("double precision");
 
                     b.Property<string>("Name")
