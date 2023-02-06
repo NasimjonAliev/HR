@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Hr.Application.Models.UserModels;
 using Hr.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hr.WebApi.Controllers

@@ -12,11 +12,11 @@ namespace Infrastructure.Configurations
 
             builder.Property(c => c.Name)
                 .HasMaxLength(50)
+                .HasColumnType("varchar")
                 .IsRequired();
 
-            //TODO округлить значение до двух чисел после запятой
             builder.Property(c => c.Amount)
-                .HasPrecision(6,2)
+                .HasColumnType("decimal(15,2)")
                 .IsRequired();  
         }
     }
