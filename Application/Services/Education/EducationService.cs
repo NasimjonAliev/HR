@@ -2,7 +2,6 @@
 using AutoMapper.QueryableExtensions;
 using Domain.Entities;
 using Hr.Application.Models.EducationModels;
-using Hr.Application.Models.PositionModels;
 using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 
