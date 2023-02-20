@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230117092037_17.01.2023_HRDb")]
-    partial class _17012023_HRDb
+    [Migration("20230209101502_09.02.2023_Hr_db")]
+    partial class _09022023_Hr_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("FatherName")
                         .IsRequired()
@@ -53,10 +57,18 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -95,13 +107,13 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("double precision");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric(15,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
@@ -117,13 +129,7 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("EducationId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("EducationId1")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("PositionId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("PositionId1")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("UserId")
@@ -133,38 +139,49 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("EducationId");
 
-                    b.HasIndex("EducationId1");
-
                     b.HasIndex("PositionId");
-
-                    b.HasIndex("PositionId1");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Staff");
                 });
 
+            modelBuilder.Entity("Domain.Entities.UserAdmin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserAdmins");
+                });
+
             modelBuilder.Entity("Domain.Entities.Staff", b =>
                 {
                     b.HasOne("Domain.Entities.Education", "Education")
-                        .WithMany()
+                        .WithMany("Staffs")
                         .HasForeignKey("EducationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Education", null)
-                        .WithMany("Staffs")
-                        .HasForeignKey("EducationId1");
-
                     b.HasOne("Domain.Entities.Position", "Position")
-                        .WithMany()
+                        .WithMany("Staffs")
                         .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("Domain.Entities.Position", null)
-                        .WithMany("Staffs")
-                        .HasForeignKey("PositionId1");
 
                     b.HasOne("Domain.Entities.Common.User", "User")
                         .WithMany()

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230123100214_23.01.2023_HrDb")]
-    partial class _23012023_HrDb
+    [Migration("20230206055711_06.02.2023_HrDb")]
+    partial class _06022023_HrDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,6 +96,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<double>("Amount")
+                        .HasPrecision(6, 2)
                         .HasColumnType("double precision");
 
                     b.Property<string>("Name")

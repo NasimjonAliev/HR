@@ -1,12 +1,13 @@
 ﻿using FluentValidation;
 using Hr.Application.Models.UserModels;
 using Hr.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hr.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/users")]
+    [Route("api/Users")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -55,7 +56,7 @@ namespace Hr.WebApi.Controllers
             {
                 await _userService.Create(userCreateModel);
 
-                return Ok("Успешно добавлен");
+                return Ok("Пользователь успешно добавлен");
             }
             else
                 return BadRequest(result.Errors.Select(c => c.ErrorMessage));
@@ -70,7 +71,7 @@ namespace Hr.WebApi.Controllers
             {
                 await _userService.Update(userUpdateModel);
 
-                return Ok("Успешно обновлен");
+                return Ok("Пользователь успешно обновлен");
             }
 
             return BadRequest(result.Errors.Select(g => g.ErrorMessage));           
@@ -81,7 +82,7 @@ namespace Hr.WebApi.Controllers
         {
             await _userService.Delete(id);
 
-            return Ok("Успешно удалено");
+            return Ok("Пользователь успешно удалено");
         }
     }
 }

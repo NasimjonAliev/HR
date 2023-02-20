@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class _17012023_HRDb : Migration
+    public partial class _01022023_HrDb_2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Amount = table.Column<double>(type: "double precision", nullable: false)
+                    Amount = table.Column<double>(type: "double precision", precision: 6, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,9 +61,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     EducationId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PositionId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EducationId1 = table.Column<Guid>(type: "uuid", nullable: true),
-                    PositionId1 = table.Column<Guid>(type: "uuid", nullable: true)
+                    PositionId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,21 +73,11 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Staff_Educations_EducationId1",
-                        column: x => x.EducationId1,
-                        principalTable: "Educations",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Staff_Positions_PositionId",
                         column: x => x.PositionId,
                         principalTable: "Positions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Staff_Positions_PositionId1",
-                        column: x => x.PositionId1,
-                        principalTable: "Positions",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Staff_Users_UserId",
                         column: x => x.UserId,
@@ -104,19 +92,9 @@ namespace Infrastructure.Migrations
                 column: "EducationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Staff_EducationId1",
-                table: "Staff",
-                column: "EducationId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Staff_PositionId",
                 table: "Staff",
                 column: "PositionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Staff_PositionId1",
-                table: "Staff",
-                column: "PositionId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Staff_UserId",

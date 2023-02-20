@@ -24,7 +24,7 @@ namespace Hr.Application.Services
                 .AsNoTracking()
                 .ProjectTo<UserViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync()
-                    ?? throw new Exception("Not Found");
+                    ?? throw new Exception("Список пользователей пусто");
         }
         
         public async Task<UserViewModel> GetById(Guid id)

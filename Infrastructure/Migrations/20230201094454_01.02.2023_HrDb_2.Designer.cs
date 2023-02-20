@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230118072655_18.01.2023_HrDb")]
-    partial class _18012023_HrDb
+    [Migration("20230201094454_01.02.2023_HrDb_2")]
+    partial class _01022023_HrDb_2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,10 +32,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("FatherName")
                         .IsRequired()
@@ -65,8 +61,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Education", b =>
@@ -102,6 +96,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<double>("Amount")
+                        .HasPrecision(6, 2)
                         .HasColumnType("double precision");
 
                     b.Property<string>("Name")
@@ -116,68 +111,43 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Staff", b =>
                 {
-                    b.HasBaseType("Domain.Entities.Common.User");
-
-                    b.Property<Guid>("EducationId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("EducationId1")
+                    b.Property<Guid>("EducationId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("PositionId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("PositionId1")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<double>("amount")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("education")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("position")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.HasKey("Id");
 
                     b.HasIndex("EducationId");
 
-                    b.HasIndex("EducationId1");
-
                     b.HasIndex("PositionId");
-
-                    b.HasIndex("PositionId1");
 
                     b.HasIndex("UserId");
 
-                    b.HasDiscriminator().HasValue("Staff");
+                    b.ToTable("Staff");
                 });
 
             modelBuilder.Entity("Domain.Entities.Staff", b =>
                 {
                     b.HasOne("Domain.Entities.Education", "Education")
-                        .WithMany()
+                        .WithMany("Staffs")
                         .HasForeignKey("EducationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Education", null)
-                        .WithMany("Staffs")
-                        .HasForeignKey("EducationId1");
-
                     b.HasOne("Domain.Entities.Position", "Position")
-                        .WithMany()
+                        .WithMany("Staffs")
                         .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("Domain.Entities.Position", null)
-                        .WithMany("Staffs")
-                        .HasForeignKey("PositionId1");
 
                     b.HasOne("Domain.Entities.Common.User", "User")
                         .WithMany()

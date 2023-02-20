@@ -12,11 +12,12 @@ namespace Infrastructure.Configurations
 
             builder.Property(c => c.Name)
                 .HasMaxLength(50)
+                .HasColumnType("varchar")
                 .IsRequired();
 
             builder.Property(c => c.Amount)
-                .IsRequired();
-                
+                .HasColumnType("decimal(15,2)")
+                .IsRequired();  
         }
     }
 }

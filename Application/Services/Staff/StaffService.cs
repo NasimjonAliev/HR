@@ -17,13 +17,14 @@ namespace Hr.Application.Services
             _context = context;
             _mapper = mapper;
         }
+
         public async Task<List<StaffViewModel>> GetAll()
         {
             return await _context.Staff
                 .AsNoTracking()
                 .ProjectTo<StaffViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync()
-                    ?? throw new Exception("Not Found");               
+                    ?? throw new Exception("Список сотрудников пусто");               
         }
 
         public async Task<StaffViewModel> GetById(Guid id)
@@ -33,7 +34,7 @@ namespace Hr.Application.Services
                 .Where(t => t.Id == id)
                 .ProjectTo<StaffViewModel>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync()
-                    ?? throw new Exception("Not Found");
+                    ?? throw new Exception("Сотрудник не найден!");
         }
 
         public async Task Create(StaffCreateModel staffCreateModel)
@@ -48,21 +49,21 @@ namespace Hr.Application.Services
         {
             var staff = await _context.Staff
                 .FirstOrDefaultAsync(t => t.Id == staffUpdateModel.Id)
-                    ?? throw new Exception("Not fouund");
+                    ?? throw new Exception("Сотрудник не найден!");
 
             _mapper.Map(staffUpdateModel, staff);
 
             await _context.SaveChangesAsync();
         }
+
         public async Task Delete(Guid id)
         {
             var staff = _context.Staff
                 .FirstOrDefault(t => t.Id == id)
-                    ?? throw new Exception("Not Found");
+                    ?? throw new Exception("Сотрудник не найден!");
 
             _context.Staff.Remove(staff);
             await _context.SaveChangesAsync();
-
         }
     }
 }
