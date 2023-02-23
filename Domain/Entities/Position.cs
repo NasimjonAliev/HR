@@ -7,7 +7,6 @@ namespace Domain.Entities
     {
         public string Name { get; set; }
         public double Amount { get; set; }
-
         public ICollection<Staff> Staffs { get; set; } = new Collection<Staff>();
     }
 }
