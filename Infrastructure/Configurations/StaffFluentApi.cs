@@ -9,23 +9,28 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Staff> builder)
         {
-            
+            builder.Property(c => c.UserId)
+                .IsRequired();
+
+            builder.Property(c => c.PositionId)
+                .IsRequired();
+
+            builder.Property(c => c.EducationId)
+                .IsRequired();
+
             builder.HasOne(c => c.User)
-                .WithMany()
+                .WithMany(c => c.Staffs)
                 .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
             builder.HasOne(c => c.Education)
                 .WithMany(c => c.Staffs)
                 .HasForeignKey(x => x.EducationId)
-                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
             builder.HasOne(c => c.Position)
                 .WithMany(c => c.Staffs)
                 .HasForeignKey(x => x.PositionId)
-                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
         }
     }

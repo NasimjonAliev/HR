@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities.Common
+﻿using System.Collections.ObjectModel;
+
+namespace Domain.Entities.Common
 {
     public class User : BaseEntity
     {
@@ -11,5 +13,7 @@
         public string Email { get; set; }
         public string Password { get; set; }
         public string Token { get; set; }
+
+        public ICollection<Staff> Staffs { get; set; } = new Collection<Staff>();
     }
 }

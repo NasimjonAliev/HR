@@ -9,8 +9,6 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(x => x.Id);
-
             builder.Property(t => t.FirstName)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -20,11 +18,13 @@ namespace Infrastructure.Configurations
                 .HasMaxLength(50);
 
             builder.Property(t => t.FatherName)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(50);
 
             builder.Property(t => t.Age)
-                .IsRequired();
+                .IsRequired()
+                .HasDefaultValue(18)
+                .HasComment("Возраст должен быть больше 18");
 
             builder.Property(t => t.PhoneNumber)
                 .IsRequired()
@@ -33,6 +33,14 @@ namespace Infrastructure.Configurations
             builder.Property(t => t.PassportNumber)
                 .IsRequired()
                 .HasMaxLength(15);
+
+            builder.HasMany(t => t.Staffs)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.UserId)
+                .IsRequired();
+
+            builder.HasIndex(t => new {t.Email, t.PassportNumber, t.PhoneNumber})
+                .IsUnique();
         }
     }
 }
