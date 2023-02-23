@@ -23,8 +23,7 @@ namespace Hr.Application.Validators
 
             RuleFor(r => r.Age)
                 .NotNull()
-                .WithMessage("Укажите возраст (+18)")
-                .GreaterThan(17)
+                .GreaterThan(18)
                 .LessThan(65);
 
             RuleFor(r => r.PhoneNumber)

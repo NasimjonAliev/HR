@@ -39,7 +39,7 @@ namespace Infrastructure.Configurations
                 .HasForeignKey(t => t.UserId)
                 .IsRequired();
 
-            builder.HasIndex(t => new {t.Email, t.PassportNumber, t.PhoneNumber})
+            builder.HasIndex(t => new {t.PassportNumber, t.PhoneNumber})
                 .IsUnique();
         }
     }

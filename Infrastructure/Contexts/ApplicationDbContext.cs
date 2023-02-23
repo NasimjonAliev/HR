@@ -14,7 +14,6 @@ namespace Infrastructure.Contexts
         public DbSet<Position> Positions { get; set; } 
         public DbSet<Staff> Staff { get; set; } 
         public DbSet<User> Users { get; set; } 
-        public DbSet<UserAdmin> UserAdmins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

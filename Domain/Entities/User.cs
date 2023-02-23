@@ -10,9 +10,6 @@ namespace Domain.Entities.Common
         public int  Age { get; set; }
         public string PhoneNumber { get; set; }
         public string PassportNumber { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Token { get; set; }
 
         public ICollection<Staff> Staffs { get; set; } = new Collection<Staff>();
     }
