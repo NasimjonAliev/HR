@@ -2,6 +2,7 @@
 using Hr.Application.Models.UserModels;
 using Hr.Application.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hr.WebApi.Controllers
@@ -39,6 +40,7 @@ namespace Hr.WebApi.Controllers
             return Ok(user);
         }
 
+        [EnableCors("AllowAllOrigin")]
         [HttpGet("update/{id}")]
         public async Task<IActionResult> GetByIdUpdate([FromRoute] Guid id)
         {
