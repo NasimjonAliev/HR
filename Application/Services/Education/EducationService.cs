@@ -48,7 +48,7 @@ namespace Hr.Application.Services
         {
             var education = await _context.Educations
                 .FirstOrDefaultAsync(t => t.Id == educationUpdateModel.id)
-                    ?? throw new Exception("Позиция не найдено!");
+                    ?? throw new Exception("не найдено!");
 
             _mapper.Map(educationUpdateModel, education);
 
@@ -59,7 +59,7 @@ namespace Hr.Application.Services
         {
             var education = await _context.Educations
                 .FirstOrDefaultAsync(t => t.Id == id)
-                    ?? throw new Exception("Позиция не найдено!");
+                    ?? throw new Exception("Не найдено!");
 
             _context.Educations.Remove(education);
             await _context.SaveChangesAsync();
